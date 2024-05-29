@@ -1,10 +1,10 @@
-## Visão computacional com OpenCV em Python, com os tópicos
+## Visão computacional com OpenCV em Python
 
-* ## [Leitura e processamento de imagens, vídeos e webcam](#2-Leitura-e-processamento-de-imagens-vídeos-e-webcam)
-* ## [Transformações geométricas e filtragem de imagens](#3-Transformações-geométricas-e-filtragem-de-imagens)
-* ## [Detecção de contornos](#4-Detecção-de-contornos)
-* ## [Transformações em canais de cor](#5-Transformações-em-canais-de-cor)
-* ## [Técnicas avançadas: blur, operações bitwise, masks, thresholding](#6-Técnicas-avançadas-blur-operações-bitwise-masks-thresholding)
+* ### [Leitura e processamento de imagens, vídeos e webcam](#2-Leitura-e-processamento-de-imagens-vídeos-e-webcam)
+* ### [Transformações geométricas e filtragem de imagens](#3-Transformações-geométricas-e-filtragem-de-imagens)
+* ### [Detecção de contornos](#4-Detecção-de-contornos)
+* ### [Transformações em canais de cor](#5-Transformações-em-canais-de-cor)
+* ### [Técnicas avançadas: blur, operações bitwise, masks, thresholding](#6-Técnicas-avançadas-blur-operações-bitwise-masks-thresholding)
 ---
 ### 1. Instalando OpenCV
 Certifique-se de ter o OpenCV instalado. Você pode instalá-lo usando o pip:
@@ -71,7 +71,7 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ```
-
+## [Index](#Visão-computacional-com-OpenCV-em-Python)
 ### 3. Transformações geométricas e filtragem de imagens
 Vamos agora realizar transformações geométricas e filtragem de imagens.
 
@@ -97,7 +97,7 @@ rotated_image = cv2.warpAffine(image, M, (cols, rows))
 # Aplicar um filtro de blur
 blurred_image = cv2.GaussianBlur(image, (kernel_size, kernel_size), 0)
 ```
-
+## [Index](#Visão-computacional-com-OpenCV-em-Python)
 ### 4. Detecção de contornos
 Vamos agora detectar contornos em uma imagem.
 
@@ -114,7 +114,7 @@ contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 # Desenhar os contornos na imagem original
 cv2.drawContours(image, contours, -1, (0, 255, 0), thickness)
 ```
-
+## [Index](#Visão-computacional-com-OpenCV-em-Python)
 ### 5. Transformações em canais de cor
 Vamos realizar algumas transformações nos canais de cor da imagem.
 
@@ -131,7 +131,7 @@ b, g, r = cv2.split(image)
 # Mesclar os canais de cor
 merged_image = cv2.merge((b, g, r))
 ```
-
+## [Index](#Visão-computacional-com-OpenCV-em-Python)
 ### 6. Técnicas avançadas: blur, operações bitwise, masks, thresholding
 Agora, vamos explorar algumas técnicas avançadas.
 
@@ -153,3 +153,4 @@ ret, thresholded_image = cv2.threshold(gray_image, threshold_value, max_value, c
 ```
 
 Este tutorial abrange os conceitos básicos e avançados de visão computacional com OpenCV em Python. Espero que isso seja útil para você! Se tiver mais dúvidas ou precisar de mais exemplos, não hesite em perguntar.
+## [Index](#Visão-computacional-com-OpenCV-em-Python)
