@@ -1,10 +1,10 @@
 ## Visão computacional com OpenCV em Python, com os tópicos
 
-* ## [Leitura e processamento de imagens, vídeos e webcam](#2-Leitura-e processamento-de-imagens,-vídeos-e-webcam)
+* ## [Leitura e processamento de imagens, vídeos e webcam](#2-Leitura-e-processamento-de-imagens-vídeos-e-webcam)
 * ## [Transformações geométricas e filtragem de imagens](#3-Transformações-geométricas-e-filtragem-de-imagens)
 * ## [Detecção de contornos](#4-Detecção-de-contornos)
 * ## [Transformações em canais de cor](#5-Transformações-em-canais-de-cor)
-* ## [Técnicas avançadas: blur, operações bitwise, masks, thresholding](#5-Técnicas-avançadas-blur-operações-bitwise-masks-thresholding)
+* ## [Técnicas avançadas: blur, operações bitwise, masks, thresholding](#6-Técnicas-avançadas-blur-operações-bitwise-masks-thresholding)
 ---
 ### 1. Instalando OpenCV
 Certifique-se de ter o OpenCV instalado. Você pode instalá-lo usando o pip:
