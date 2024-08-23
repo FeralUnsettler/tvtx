@@ -171,14 +171,3 @@ Neste slide, apresento uma estimativa do investimento financeiro necessário par
 
 *Speaker Notes*
 Na conclusão, repito a mensagem principal da palestra: a combinação entre paixão pelo tênis e conhecimento em Python como chave para o sucesso do projeto. Enfatizo o potencial da tecnologia para auxiliar no aprimoramento de habilidades, na superação de desafios e na conquista de objetivos pessoais. Agradeço a atenção do público e convido para perguntas e comentários, demonstrando abertura para discussões e interação com a plateia.
-
-**Considerações adicionais:**
-
-* Você pode personalizar o design dos slides para torná-los mais atraentes e alinhados com sua identidade visual.
-* Utilize gráficos e diagramas para ilustrar conceitos complexos e facilitar a compreensão do público.
-* Inclua um slide com suas informações de contato para que as pessoas possam entrar em contato com você posteriormente.
-* Pratique sua apresentação com antecedência para garantir um ritmo natural e fluente.
-
-**Conclusão:**
-
-Este formato de apresentação de slides fornece uma estrutura clara e concisa para compartilhar sua jornada de como o Python te ajudou a melhorar seu saque de tênis. Ao detalhar o processo de desenvolvimento, os recursos utilizados e os resultados obtidos, você inspira a plateia e demonstra o potencial da tecnologia para auxiliar na busca de objetivos pessoais e profissionais.
