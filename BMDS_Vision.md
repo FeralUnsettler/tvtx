@@ -1,8 +1,8 @@
-### Análise da Patente
+### BMDS®Vision
 
-A patente US11893808B2 descreve um sistema de extração de propriedades 3D baseado em aprendizado de máquina (machine learning), utilizando uma rede neural para reconhecer propriedades 3D de objetos a partir de imagens 2D capturadas durante eventos participativos, como eventos esportivos.
+BMDS®Vision é um sistema de extração de propriedades 3D baseado em aprendizado de máquina (machine learning), utilizando uma rede neural para reconhecer propriedades 3D de objetos a partir de imagens 2D capturadas durante eventos participativos, como eventos esportivos.
 
-**Principais componentes descritos na patente:**
+**Principais componentes do **BMDS_Vision:**
 1. **Captura de Imagens 2D ao Vivo:** Através de uma câmera, são capturadas imagens 2D de um evento participativo, incluindo características visuais de referência e objetos envolvidos no evento.
 2. **Treinamento de Rede Neural:** Uma rede neural é treinada para reconhecer propriedades 3D de objetos com base em um conjunto de imagens 2D e medições 3D do objeto obtidas durante eventos de treinamento anteriores.
 3. **Extração de Propriedades 3D:** O sistema pode identificar várias propriedades 3D, como localização, orientação, tamanho e velocidade dos objetos no espaço 3D do evento.
@@ -10,7 +10,7 @@ A patente US11893808B2 descreve um sistema de extração de propriedades 3D base
 
 ### Estrutura do Script Python para Implementação de CNN
 
-O script abaixo implementa uma CNN básica que poderia ser usada como parte do sistema descrito na patente. Ele inclui etapas para a construção, treinamento e previsão utilizando uma rede neural convolucional para reconhecimento de propriedades 3D de objetos com base em imagens 2D.
+O script abaixo implementa uma CNN básica que poderia ser usada como parte do sistema do **BMDS®Vision**. Ele inclui etapas para a construção, treinamento e previsão utilizando uma rede neural convolucional para reconhecimento de propriedades 3D de objetos com base em imagens 2D.
 
 ```python
 import tensorflow as tf
