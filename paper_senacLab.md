@@ -8,7 +8,8 @@ No cenário esportivo global, o tênis se destaca por exigir um alto nível de t
 
 Desenvolvido como uma **Plataforma como Serviço (PaaS)**, o **Tênis Vídeo Treino** visa proporcionar aos usuários, desde iniciantes até profissionais, uma análise detalhada dos principais golpes do tênis — Forehand, Backhand e Serviço (saque) — capturados em tempo real via dispositivos móveis. Utilizando tecnologias de ponta como Python OpenCV, Django e Streamlit, a plataforma não só identifica e analisa os movimentos, mas também oferece feedbacks instantâneos e personalizados, com a possibilidade de comparação com tenistas profissionais na versão PREMIUM. Alinhado aos objetivos do **Programa Startup in Lab - 6º Ciclo 2024**, o projeto visa fomentar o empreendedorismo inovador e contribuir para o desenvolvimento do setor esportivo com uma solução escalável e repetível.
 
-![1](https://github.com/FeralUnsettler/tvtx/blob/main/img/1.webp)
+![image](https://github.com/user-attachments/assets/aec729d9-91fc-40b5-b5e5-5a778279e910)
+
 
 ---
 
@@ -21,7 +22,8 @@ O **Tênis Vídeo Treino** tem como objetivo apoiar e revolucionar o treinamento
 - **Fomenta o desenvolvimento de novas startups e modelos de negócio**, ao oferecer uma plataforma escalável que pode ser adaptada para outros esportes e contextos.
 - **Apoia a transformação de ideias em projetos e startups**, contribuindo para o ecossistema de inovação e incentivando o empreendedorismo esportivo.
 
-![2](https://github.com/FeralUnsettler/tvtx/blob/main/img/2.webp)
+![image](https://github.com/user-attachments/assets/85925cc7-149e-437b-9036-95945ea4caba)
+
 
 ---
 
@@ -46,7 +48,8 @@ O sistema realiza uma análise detalhada dos golpes, utilizando a visão computa
 - **Backhand:** Foco na precisão do movimento, simetria e controle da raquete.
 - **Serviço (Saque):** Análise do lançamento da bola, posição dos pés e coordenação dos braços.
 
-- ![3](https://github.com/FeralUnsettler/tvtx/blob/main/img/3.webp)
+![image](https://github.com/user-attachments/assets/1b865b2e-79ca-4e38-b1d9-7cc057fc28c0)
+
 
 A partir do esqueletamento fornecido pela API de Pose Detection, a plataforma traça a trajetória da bola e avalia a eficiência dos golpes, comparando-os com padrões de excelência pré-estabelecidos e identificando oportunidades de melhoria.
 
@@ -60,7 +63,8 @@ O **Tênis Vídeo Treino** se alinha perfeitamente com os objetivos do **Program
 - **Digitalização:** A plataforma facilita a digitalização do treinamento esportivo, permitindo que jogadores de qualquer nível técnico melhorem suas habilidades através de uma interface digital intuitiva.
 - **Experiência do Usuário:** O design centrado no usuário, aliado à capacidade de feedback em tempo real, garante uma experiência de alto valor para os usuários.
 
-![4](https://github.com/FeralUnsettler/tvtx/blob/main/img/4.webp)
+![image](https://github.com/user-attachments/assets/0d2f3613-3cd3-4e33-98ee-5e8c5d21c953)
+
 ---
 
 #### **5. Estrutura do Programa**
@@ -75,7 +79,8 @@ O **Tênis Vídeo Treino** se alinha perfeitamente com os objetivos do **Program
 - **Comparação com Profissionais:** A plataforma permite a comparação direta dos golpes do usuário com os de tenistas profissionais, destacando áreas de melhoria.
 - **Coaching Personalizado:** Usuários PREMIUM têm acesso a sessões de coaching com tenistas e treinadores de renome, utilizando os dados da plataforma para oferecer um feedback detalhado e individualizado.
 
-![5](https://github.com/FeralUnsettler/tvtx/blob/main/img/5.webp)
+![image](https://github.com/user-attachments/assets/5bcdc0e5-586b-42fd-85bf-1509e73d1c2b)
+
 
 ---
 
@@ -83,7 +88,8 @@ O **Tênis Vídeo Treino** se alinha perfeitamente com os objetivos do **Program
 
 Espera-se que a implementação do **Tênis Vídeo Treino** resulte em uma melhoria significativa no desempenho técnico dos usuários, além de promover uma maior adesão à prática esportiva através de uma ferramenta que facilita o aprendizado e o aprimoramento contínuo. A comparação com tenistas profissionais e o coaching personalizado na versão PREMIUM são diferenciais que visam acelerar o progresso dos jogadores, tanto em nível amador quanto profissional.
 
-![6](https://github.com/FeralUnsettler/tvtx/blob/main/img/6.webp)
+![image](https://github.com/user-attachments/assets/1a37da09-fd07-4af6-974c-816d7c2c6065)
+
 
 ---
 
