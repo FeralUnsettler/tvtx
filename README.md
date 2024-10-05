@@ -45,9 +45,9 @@ A validação será realizada através de testes com jogadores reais, que utiliz
 
 Para mais detalhes e artefatos adicionais, como benchmarks, documentos de requisitos e diagramas, consulte os repositórios:
 
-[senacLab.md](https://github.com/FeralUnsettler/tvtx/blob/main/paper_senacLab.md)
-[BMDS_Vision.md](https://github.com/FeralUnsettler/tvtx/blob/main/BMDS_Vision.md)
-[TVTx Framework](https://github.com/FeralUnsettler/tvtx/blob/main/p2mvp_framework.md)
-[Benchmark App](https://github.com/FeralUnsettler/tvtx/blob/main/benchmark.md)
+1. [Tênis Vídeo Treino - Plataforma de Análise de Desempenho no Tênis Utilizando Visão Computacional](https://github.com/FeralUnsettler/tvtx/blob/main/paper_senacLab.md)
+2. [BMDS_Vision.md](https://github.com/FeralUnsettler/tvtx/blob/main/BMDS_Vision.md)
+3. [TVTx Framework](https://github.com/FeralUnsettler/tvtx/blob/main/p2mvp_framework.md)
+4. [Benchmark App](https://github.com/FeralUnsettler/tvtx/blob/main/benchmark.md)
 
 
