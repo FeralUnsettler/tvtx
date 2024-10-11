@@ -97,7 +97,8 @@ Espera-se que a implementação do **Tênis Vídeo Treino** resulte em uma melho
 
 O **Tênis Vídeo Treino** é uma solução inovadora que integra tecnologia de ponta com as necessidades do treinamento esportivo. Alinhado com os princípios de inovação aberta e empreendedorismo promovidos pelo **Programa Startup in Lab - 6º Ciclo 2024**, o projeto oferece uma plataforma robusta, escalável e com grande potencial de impacto no mercado esportivo. Ao democratizar o acesso a análises técnicas de alta precisão e coaching especializado, o **Tênis Vídeo Treino** se posiciona como uma ferramenta indispensável para todos que desejam aprimorar suas habilidades no tênis.
 
-![7](https://github.com/FeralUnsettler/tvtx/blob/main/img/7.webp)
+![image](https://github.com/user-attachments/assets/67cb2724-655c-4db2-b612-d24361880035)
+
 
 ---
 
