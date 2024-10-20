@@ -24,18 +24,24 @@ def process_video(file):
     
     # Get the video's FPS (Frames Per Second) to control playback speed
     fps = cap.get(cv2.CAP_PROP_FPS)
-    stframe = st.empty()  # Placeholder for the video frames
 
     # Use MediaPipe Pose to detect landmarks (GPU-enabled)
     with mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5, model_complexity=1) as pose:
+        stframe = st.empty()  # Placeholder for the video frames
+        start_time = time.time()
+
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
-                st.warning("No more frames to process.")
                 break
 
+            # Transfer the frame to GPU if available
+            if device == 'cuda':
+                # If using OpenCV with CUDA, resize and process on the GPU
+                frame = cv2.cuda_GpuMat().upload(frame)
+
             # Convert the image color to RGB (MediaPipe expects RGB)
-            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            rgb_frame = cv2.cvtColor(frame.download(), cv2.COLOR_BGR2RGB) if device == 'cuda' else cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = pose.process(rgb_frame)
 
             # Draw pose landmarks on the frame
@@ -48,11 +54,17 @@ def process_video(file):
                     mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2),
                 )
 
+            # Transfer the frame back to the CPU if processed on GPU
+            frame = frame.download() if device == 'cuda' else frame
+
             # Display the resulting frame in Streamlit (simulating a video stream)
             stframe.image(frame, channels='BGR', use_column_width=True)
 
             # Control the video playback speed
-            # time.sleep(1.0 / fps)  # Adjust frame timing based on FPS
+            time_elapsed = time.time() - start_time
+            wait_time = max(1.0 / fps - time_elapsed, 0)
+            time.sleep(wait_time)  # Adjust frame timing based on FPS
+            start_time = time.time()
 
     cap.release()
 
