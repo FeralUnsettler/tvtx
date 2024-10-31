@@ -3,47 +3,42 @@ import cv2
 import tempfile
 import mediapipe as mp
 import time
-import torch  # For GPU availability check
+import torch  # To ensure GPU availability
 
 # Check if CUDA is available
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 st.write(f"Using device: {device}")
 
-# Initialize MediaPipe Pose and Drawing Utils
+# Initialize MediaPipe pose landmarker
 mp_pose = mp.solutions.pose
 mp_drawing = mp.solutions.drawing_utils
 
-# Function to process video and draw landmarks
+# Function to process video and draw landmarks, presenting it as a continuous video stream
 def process_video(file):
     # Create a temporary file to save the uploaded video
     tfile = tempfile.NamedTemporaryFile(delete=False)
     tfile.write(file.read())
-    tfile.close()
 
     # Open the video file using OpenCV
     cap = cv2.VideoCapture(tfile.name)
     
-    # Get the video's FPS to control playback speed
+    # Get the video's FPS (Frames Per Second) to control playback speed
     fps = cap.get(cv2.CAP_PROP_FPS)
-    stframe = st.empty()  # Placeholder for video frames
-    progress_bar = st.progress(0)
+    stframe = st.empty()  # Placeholder for the video frames
 
-    # Use MediaPipe Pose for landmark detection
+    # Use MediaPipe Pose to detect landmarks (GPU-enabled)
     with mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5, model_complexity=1) as pose:
-        frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        frame_num = 0
-        
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
-                st.warning("End of video.")
+                st.warning("No more frames to process.")
                 break
 
-            # Convert the image to RGB as MediaPipe requires
+            # Convert the image color to RGB (MediaPipe expects RGB)
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = pose.process(rgb_frame)
 
-            # Draw pose landmarks
+            # Draw pose landmarks on the frame
             if results.pose_landmarks:
                 mp_drawing.draw_landmarks(
                     frame,
@@ -53,23 +48,18 @@ def process_video(file):
                     mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2),
                 )
 
-            # Display the resulting frame
+            # Display the resulting frame in Streamlit (simulating a video stream)
             stframe.image(frame, channels='BGR', use_column_width=True)
 
-            # Update progress bar
-            frame_num += 1
-            progress_bar.progress(frame_num / frame_count)
-
-            # Control playback speed based on FPS
-            time.sleep(1.0 / fps)
+            # Control the video playback speed
+            # time.sleep(1.0 / fps)  # Adjust frame timing based on FPS
 
     cap.release()
-    progress_bar.empty()
 
-# Streamlit app interface
-st.title("CUDA-Accelerated Pose Detection with MediaPipe")
+# Streamlit app
+st.title("CUDA-Accelerated Pose Landmark Detection with MediaPipe")
 
-# File uploader
+# File uploader for the video file
 uploaded_file = st.file_uploader("Upload a video file", type=["mp4", "mov", "avi"])
 
 if uploaded_file is not None:

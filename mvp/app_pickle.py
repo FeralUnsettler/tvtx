@@ -3,7 +3,9 @@ import cv2
 import tempfile
 import mediapipe as mp
 import time
-import torch  # For GPU availability check
+import torch
+import pickle
+import os
 
 # Check if CUDA is available
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -13,7 +15,7 @@ st.write(f"Using device: {device}")
 mp_pose = mp.solutions.pose
 mp_drawing = mp.solutions.drawing_utils
 
-# Function to process video and draw landmarks
+# Function to process video, display frames, and save landmarks to a pickle file
 def process_video(file):
     # Create a temporary file to save the uploaded video
     tfile = tempfile.NamedTemporaryFile(delete=False)
@@ -22,15 +24,14 @@ def process_video(file):
 
     # Open the video file using OpenCV
     cap = cv2.VideoCapture(tfile.name)
-    
-    # Get the video's FPS to control playback speed
     fps = cap.get(cv2.CAP_PROP_FPS)
     stframe = st.empty()  # Placeholder for video frames
-    progress_bar = st.progress(0)
+
+    # Dictionary to store landmarks data
+    landmarks_data = {}
 
     # Use MediaPipe Pose for landmark detection
     with mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5, model_complexity=1) as pose:
-        frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         frame_num = 0
         
         while cap.isOpened():
@@ -39,12 +40,19 @@ def process_video(file):
                 st.warning("End of video.")
                 break
 
-            # Convert the image to RGB as MediaPipe requires
+            # Convert the frame to RGB as MediaPipe requires
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = pose.process(rgb_frame)
 
-            # Draw pose landmarks
+            # Extract pose landmarks data
             if results.pose_landmarks:
+                landmarks = {
+                    landmark_id: (landmark.x, landmark.y, landmark.z, landmark.visibility)
+                    for landmark_id, landmark in enumerate(results.pose_landmarks.landmark)
+                }
+                landmarks_data[frame_num] = landmarks
+
+                # Draw landmarks on the frame for visualization
                 mp_drawing.draw_landmarks(
                     frame,
                     results.pose_landmarks,
@@ -53,21 +61,34 @@ def process_video(file):
                     mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2),
                 )
 
-            # Display the resulting frame
+            # Display the resulting frame in Streamlit (simulating video preview)
             stframe.image(frame, channels='BGR', use_column_width=True)
 
-            # Update progress bar
             frame_num += 1
-            progress_bar.progress(frame_num / frame_count)
-
-            # Control playback speed based on FPS
-            time.sleep(1.0 / fps)
+            time.sleep(1.0 / fps)  # Control playback speed
 
     cap.release()
-    progress_bar.empty()
+    
+    # Save landmarks data to a pickle file
+    pickle_file_path = "pose_landmarks_data.pkl"
+    with open(pickle_file_path, "wb") as f:
+        pickle.dump(landmarks_data, f)
+    st.success("Landmark data has been saved.")
+
+    # Provide download option for the pickle file
+    with open(pickle_file_path, "rb") as f:
+        st.download_button(
+            label="Download Pose Landmark Data",
+            data=f,
+            file_name="pose_landmarks_data.pkl",
+            mime="application/octet-stream"
+        )
+
+    # Remove the temporary pickle file after download to clean up
+    os.remove(pickle_file_path)
 
 # Streamlit app interface
-st.title("CUDA-Accelerated Pose Detection with MediaPipe")
+st.title("CUDA-Accelerated Pose Detection with MediaPipe and Export to Pickle")
 
 # File uploader
 uploaded_file = st.file_uploader("Upload a video file", type=["mp4", "mov", "avi"])
