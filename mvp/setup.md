@@ -1,6 +1,6 @@
-To create a shell script that sets up the entire structure for your Streamlit application project in Visual Studio Code (VSCode), you can use the following script. This script will create the necessary directories, files, and sample content needed for your project, including the Docker configuration, Streamlit app, and Terraform setup.
+# To create a shell script that sets up the entire structure for your Streamlit application project in Visual Studio Code (VSCode), you can use the following script. This script will create the necessary directories, files, and sample content needed for your project, including the Docker configuration, Streamlit app, and Terraform setup
 
-### **Shell Script (`setup_project.sh`)**
+## **Shell Script (`setup_project.sh`)**
 
 ```bash
 #!/bin/bash
@@ -188,11 +188,13 @@ echo "Project structure for $PROJECT_NAME has been created successfully."
    - Copy and paste the above script into `setup_project.sh`.
 
 2. **Make the Script Executable:**
+
    ```bash
    chmod +x setup_project.sh
    ```
 
 3. **Run the Script:**
+
    ```bash
    ./setup_project.sh
    ```
