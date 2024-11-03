@@ -3,7 +3,6 @@ import mediapipe as mp
 import numpy as np
 from PIL import Image
 import tempfile
-import time
 
 # Initialize MediaPipe Pose and Drawing Utils
 mp_pose = mp.solutions.pose
@@ -33,6 +32,7 @@ def detect_stroke(landmarks):
         elif angle > 100 and right_wrist[0] > right_shoulder[0]:  # Forehand
             return "Forehand"
         elif angle > 100 and right_wrist[0] < right_shoulder[0]:  # Backhand
+            return "Backhand"  # Ensure "Backhand" is returned here
 
     return "Unknown"
 
