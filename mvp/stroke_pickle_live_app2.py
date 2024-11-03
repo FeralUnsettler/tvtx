@@ -1,16 +1,16 @@
 import streamlit as st
-import cv2
 import mediapipe as mp
-import pickle
 import numpy as np
 from PIL import Image
-
-# Set page configuration
-st.set_page_config(layout="wide")
+import tempfile
+import time
 
 # Initialize MediaPipe Pose and Drawing Utils
 mp_pose = mp.solutions.pose
 mp_drawing = mp.solutions.drawing_utils
+
+# Set Streamlit page configuration
+st.set_page_config(layout="wide")
 
 # Helper function to detect stroke type based on key landmarks
 def detect_stroke(landmarks):
@@ -27,90 +27,72 @@ def detect_stroke(landmarks):
             np.dot(shoulder_to_elbow, elbow_to_wrist) / (np.linalg.norm(shoulder_to_elbow) * np.linalg.norm(elbow_to_wrist))
         ))
 
-        # Detect Serve
+        # Detect Serve, Forehand, or Backhand based on angle and position
         if angle < 45 and right_wrist[1] < right_shoulder[1]:
             return "Serve"
         elif angle > 100 and right_wrist[0] > right_shoulder[0]:  # Forehand
             return "Forehand"
         elif angle > 100 and right_wrist[0] < right_shoulder[0]:  # Backhand
-            return "Backhand"
 
     return "Unknown"
 
-# Process video from camera input and display landmarks, with the option to record landmarks
-def process_camera_input(camera_input):
-    # Streamlit placeholder for video frames
-    stframe = st.empty()
+# Function to process frames and add pose landmarks
+def process_frame(image, pose):
+    # Convert image to RGB (MediaPipe expects RGB)
+    rgb_image = np.array(image.convert("RGB"))
+    results = pose.process(rgb_image)
 
-    # Dictionary to store landmarks data
-    landmarks_data = {}
-
-    # Initialize pose detection model
-    with mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5, model_complexity=1) as pose:
-        frame_num = 0
-        
-        while camera_input is not None:
-            # Convert to image format for MediaPipe processing
-            img = Image.open(camera_input)
-            frame = np.array(img)
-
-            # Convert the frame to RGB for MediaPipe
-            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            results = pose.process(rgb_frame)
-
-            # Record landmarks if they exist
-            if results.pose_landmarks:
-                landmarks = {
-                    landmark_id: (landmark.x, landmark.y, landmark.z, landmark.visibility)
-                    for landmark_id, landmark in enumerate(results.pose_landmarks.landmark)
-                }
-                stroke_type = detect_stroke(landmarks)
-                
-                # Draw landmarks on frame and display stroke type
-                mp_drawing.draw_landmarks(
-                    frame,
-                    results.pose_landmarks,
-                    mp_pose.POSE_CONNECTIONS,
-                    mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2),
-                    mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2),
-                )
-                cv2.putText(frame, f"Stroke: {stroke_type}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
-                landmarks_data[frame_num] = landmarks
-
-            # Display the processed frame
-            stframe.image(frame, channels='BGR', use_column_width=True)
-            frame_num += 1
-
-    # Save landmarks to a pickle file
-    with open("pose_landmarks_data.pkl", "wb") as f:
-        pickle.dump(landmarks_data, f)
-    st.success("Landmark data has been saved.")
-
-    # Allow download of the pickle file
-    with open("pose_landmarks_data.pkl", "rb") as f:
-        st.download_button(
-            label="Download Pose Landmark Data",
-            data=f,
-            file_name="pose_landmarks_data.pkl",
-            mime="application/octet-stream"
+    # Draw landmarks on the image if detected
+    if results.pose_landmarks:
+        annotated_image = rgb_image.copy()
+        mp_drawing.draw_landmarks(
+            annotated_image,
+            results.pose_landmarks,
+            mp_pose.POSE_CONNECTIONS,
+            mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2),
+            mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2),
         )
+        landmarks = [
+            (landmark.x, landmark.y, landmark.z, landmark.visibility)
+            for landmark in results.pose_landmarks.landmark
+        ]
+        stroke_type = detect_stroke(landmarks)
+        return Image.fromarray(annotated_image), stroke_type
+
+    return image, "Unknown"
 
 # Streamlit app interface
-st.title("Pose Detection with Stroke Recognition and Export to Pickle")
+st.title("Real-Time Pose Detection with Stroke Recognition")
 
-# Sidebar for video input options
+# Sidebar for input options
 st.sidebar.title("Input Options")
 video_source = st.sidebar.radio("Choose video source:", ("Webcam", "Upload a video file"))
 
-# Webcam or video file processing
-if video_source == "Webcam":
-    st.info("Please allow access to the webcam to start.")
-    camera_input = st.camera_input("Record a short video")
-    if camera_input:
-        st.text("Processing webcam video, please wait...")
-        process_camera_input(camera_input)
-else:
-    uploaded_file = st.file_uploader("Upload a video file", type=["mp4", "mov", "avi"])
-    if uploaded_file:
-        st.text("Processing uploaded video, please wait...")
-        process_camera_input(uploaded_file)
+# Initialize MediaPipe Pose model
+with mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+    
+    # Webcam input handling
+    if video_source == "Webcam":
+        st.info("Please allow access to the webcam.")
+        camera_input = st.camera_input("Record from webcam")
+
+        if camera_input is not None:
+            # Read the frame from camera input
+            img = Image.open(camera_input)
+
+            # Process the frame for pose detection and stroke recognition
+            processed_img, stroke_type = process_frame(img, pose)
+            
+            # Display the processed frame with annotations
+            st.image(processed_img, use_column_width=True)
+            st.write(f"Detected Stroke Type: {stroke_type}")
+
+    # Uploaded video file handling
+    else:
+        uploaded_file = st.file_uploader("Upload a video file", type=["mp4", "mov", "avi"])
+        if uploaded_file is not None:
+            tfile = tempfile.NamedTemporaryFile(delete=False)
+            tfile.write(uploaded_file.read())
+            
+            st.video(tfile.name)
+            st.write("Note: Real-time pose detection on uploaded video files may not work with Streamlit's video player.")
