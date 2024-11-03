@@ -2,6 +2,7 @@ import streamlit as st
 import cv2
 import mediapipe as mp
 import tempfile
+import pickle
 import numpy as np
 
 # Set page configuration
@@ -26,7 +27,7 @@ def detect_stroke(landmarks):
             np.dot(shoulder_to_elbow, elbow_to_wrist) / (np.linalg.norm(shoulder_to_elbow) * np.linalg.norm(elbow_to_wrist))
         ))
 
-        # Detect Serve, Forehand, or Backhand based on angle and position
+        # Detect Serve
         if angle < 45 and right_wrist[1] < right_shoulder[1]:
             return "Serve"
         elif angle > 100 and right_wrist[0] > right_shoulder[0]:  # Forehand
@@ -36,75 +37,81 @@ def detect_stroke(landmarks):
 
     return "Unknown"
 
-# Process video frames and display with pose landmarks and stroke type
-def process_camera_frame(frame):
-    # Convert frame to RGB for MediaPipe processing
-    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    results = pose.process(rgb_frame)
+# Process video and display landmarks, with the option to record landmarks
+def process_video(file):
+    tfile = tempfile.NamedTemporaryFile(delete=False)
+    tfile.write(file.read())
+    tfile.close()
 
-    # Record and display landmarks if detected
-    if results.pose_landmarks:
-        landmarks = {
-            landmark_id: (landmark.x, landmark.y, landmark.z, landmark.visibility)
-            for landmark_id, landmark in enumerate(results.pose_landmarks.landmark)
-        }
-        stroke_type = detect_stroke(landmarks)
-        
-        # Draw landmarks on frame
-        mp_drawing.draw_landmarks(
-            frame,
-            results.pose_landmarks,
-            mp_pose.POSE_CONNECTIONS,
-            mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2),
-            mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2),
+    cap = cv2.VideoCapture(tfile.name)
+    stframe = st.empty()  # Streamlit placeholder for video frames
+
+    landmarks_data = {}
+
+    with mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5, model_complexity=1) as pose:
+        frame_num = 0
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            results = pose.process(rgb_frame)
+
+            # Record landmarks if they exist
+            if results.pose_landmarks:
+                landmarks = {
+                    landmark_id: (landmark.x, landmark.y, landmark.z, landmark.visibility)
+                    for landmark_id, landmark in enumerate(results.pose_landmarks.landmark)
+                }
+                stroke_type = detect_stroke(landmarks)
+                
+                # Draw landmarks on frame and display stroke type
+                mp_drawing.draw_landmarks(
+                    frame,
+                    results.pose_landmarks,
+                    mp_pose.POSE_CONNECTIONS,
+                    mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2),
+                    mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2),
+                )
+                cv2.putText(frame, f"Stroke: {stroke_type}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+                landmarks_data[frame_num] = landmarks
+
+            stframe.image(frame, channels='BGR', use_column_width=True)
+            frame_num += 1
+
+    cap.release()
+    
+    # Save landmarks to a pickle file
+    with open("pose_landmarks_data.pkl", "wb") as f:
+        pickle.dump(landmarks_data, f)
+    st.success("Landmark data has been saved.")
+
+    # Allow download of the pickle file
+    with open("pose_landmarks_data.pkl", "rb") as f:
+        st.download_button(
+            label="Download Pose Landmark Data",
+            data=f,
+            file_name="pose_landmarks_data.pkl",
+            mime="application/octet-stream"
         )
-        # Display stroke type on the frame
-        cv2.putText(frame, f"Stroke: {stroke_type}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-
-    return frame
 
 # Streamlit app interface
-st.title("Real-Time Pose Detection with Stroke Recognition")
+st.title("Pose Detection with Stroke Recognition and Export to Pickle")
 
-# Initialize MediaPipe Pose model
-with mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5, model_complexity=1) as pose:
-    # Sidebar for input options
-    st.sidebar.title("Input Options")
-    video_source = st.sidebar.radio("Choose video source:", ("Webcam", "Upload a video file"))
+# Sidebar for video input options
+st.sidebar.title("Input Options")
+video_source = st.sidebar.radio("Choose video source:", ("Webcam", "Upload a video file"))
 
-    # Webcam input handling
-    if video_source == "Webcam":
-        st.info("Please allow access to the webcam.")
-        camera_input = st.camera_input("Record from webcam")
-        if camera_input is not None:
-            # Read the frame from camera input
-            temp_file = tempfile.NamedTemporaryFile(delete=False)  # Save the image temporarily
-            temp_file.write(camera_input.getvalue())  # Get bytes and write to file
-            frame = cv2.imread(temp_file.name)  # Read file as an image with OpenCV
-            
-            # Process the frame for pose detection and stroke recognition
-            processed_frame = process_camera_frame(frame)
-            
-            # Display the processed frame with annotations
-            st.image(processed_frame, channels="BGR", use_column_width=True)
-
-    # Uploaded video file handling
-    else:
-        uploaded_file = st.file_uploader("Upload a video file", type=["mp4", "mov", "avi"])
-        if uploaded_file is not None:
-            tfile = tempfile.NamedTemporaryFile(delete=False)
-            tfile.write(uploaded_file.read())
-            cap = cv2.VideoCapture(tfile.name)
-
-            stframe = st.empty()  # Placeholder for video frames
-
-            # Process and display each frame in the video file
-            while cap.isOpened():
-                ret, frame = cap.read()
-                if not ret:
-                    break
-
-                processed_frame = process_camera_frame(frame)
-                stframe.image(processed_frame, channels="BGR", use_column_width=True)
-
-            cap.release()
+# Webcam or video file processing
+if video_source == "Webcam":
+    st.info("Please allow access to the webcam to start.")
+    camera_input = st.camera_input("Record a short video")
+    if camera_input:
+        st.text("Processing webcam video, please wait...")
+        process_video(camera_input)
+else:
+    uploaded_file = st.file_uploader("Upload a video file", type=["mp4", "mov", "avi"])
+    if uploaded_file:
+        st.text("Processing uploaded video, please wait...")
+        process_video(uploaded_file)
