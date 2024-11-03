@@ -1,6 +1,8 @@
 streamlit
+opencv-python-headless
 opencv-python
 mediapipe 
 torch 
 torchvision 
 torchaudio
+numpy
