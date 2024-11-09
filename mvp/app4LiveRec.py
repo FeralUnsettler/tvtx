@@ -10,7 +10,7 @@ import os
 
 # Check if CUDA is available
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-st.write(f"Using device: {device}")
+st.sidebar.write(f"Using device: {device}")
 
 # Initialize MediaPipe Pose and Drawing Utils
 mp_pose = mp.solutions.pose
@@ -79,7 +79,7 @@ def process_video(cap, record=False):
                     mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2),
                     mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2),
                 )
-                cv2.putText(frame, f"Stroke: {stroke_type}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+                cv2.putText(frame, f"Stroke: {stroke_type}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
             stframe.image(frame, channels='BGR', use_column_width=True)
             if record:
@@ -93,11 +93,11 @@ def process_video(cap, record=False):
     
     with open("pose_landmarks_data.pkl", "wb") as f:
         pickle.dump(landmarks_data, f)
-    st.success("Landmark data has been saved.")
+    st.sidebar.success("Landmark data has been saved.")
 
     if record:
         with open("recorded_video.avi", "rb") as f:
-            st.download_button(
+            st.sidebar.download_button(
                 label="Download 20-second Recorded Video",
                 data=f,
                 file_name="recorded_video.avi",
@@ -105,7 +105,7 @@ def process_video(cap, record=False):
             )
 
     with open("pose_landmarks_data.pkl", "rb") as f:
-        st.download_button(
+        st.sidebar.download_button(
             label="Download Pose Landmark Data",
             data=f,
             file_name="pose_landmarks_data.pkl",
@@ -115,13 +115,23 @@ def process_video(cap, record=False):
     os.remove("pose_landmarks_data.pkl")
 
 # Streamlit app interface
-st.title("Pose Detection with Stroke Recognition and Video Recording")
+st.title("TVTxMindVision - Pose Detection & Stroke Recognition")
 
-# Option to select video source
-source = st.selectbox("Select Video Source", ("Upload a video file", "Live Webcam"))
+# Instructions for the user
+st.markdown("""
+### Instructions:
+1. **Select Video Source**: Use the sidebar to choose between uploading a video or using the live webcam feed.
+2. **For Uploaded Videos**: Simply upload the video file, and it will be processed automatically.
+3. **For Webcam Recording**: Click "Start Live Webcam Recording" to record a 20-second video using your webcam.
+4. **Stroke Detection**: The app will detect and display the stroke type (Serve, Forehand, Backhand) in real-time.
+5. **Download Options**: After processing, download the landmark data and recorded video (if applicable) from the sidebar.
+""")
+
+# Sidebar for source selection
+source = st.sidebar.selectbox("Select Video Source", ("Upload a video file", "Live Webcam"))
 
 if source == "Upload a video file":
-    uploaded_file = st.file_uploader("Upload a video file", type=["mp4", "mov", "avi"])
+    uploaded_file = st.sidebar.file_uploader("Upload a video file", type=["mp4", "mov", "avi"])
     if uploaded_file is not None:
         tfile = tempfile.NamedTemporaryFile(delete=False)
         tfile.write(uploaded_file.read())
@@ -132,7 +142,7 @@ if source == "Upload a video file":
         process_video(cap)
         
 else:
-    if st.button("Start Live Webcam Recording (20 seconds)"):
+    if st.sidebar.button("Start Live Webcam Recording (20 seconds)"):
         cap = cv2.VideoCapture(0)
         if not cap.isOpened():
             st.error("Could not open webcam.")
