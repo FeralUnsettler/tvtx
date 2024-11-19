@@ -167,7 +167,7 @@ def process_uploaded_video(file):
     os.remove("pose_landmarks_data.pkl")
 
 # Streamlit app interface
-st.title("Real-Time Pose Detection with Stroke Recognition and Export to Pickle")
+st.title("TennisVideoTreino®X | Powered by BMDS®MindVision")
 
 # Video input selection
 st.sidebar.title("Input Options")

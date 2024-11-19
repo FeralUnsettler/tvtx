@@ -115,7 +115,7 @@ def process_video(cap, record=False):
     os.remove("pose_landmarks_data.pkl")
 
 # Streamlit app interface
-st.title("TVTxMindVision - Pose Detection & Stroke Recognition")
+st.title("TennisVideoTreino®X | Powered by BMDS®MindVision")
 
 # Instructions for the user
 st.markdown("""
