@@ -82,11 +82,11 @@ def processar_video(cap, gravar=False):
                 )
                 cv2.putText(quadro, f"Golpe: {tipo_golpe}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
-            stframe.image(quadro, channels='BGR', use_column_width=True)
+            stframe.image(quadro, channels='BGR', use_container_width=True)
             if gravar:
                 gravador_video.write(quadro)
             numero_quadro += 1
-            #time.sleep(1.0 / fps)
+            time.sleep(0.01 / fps)
 
     cap.release()
     if gravador_video:
