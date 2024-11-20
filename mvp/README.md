@@ -109,6 +109,9 @@ O **TVTx** foi projetado com uma arquitetura modular, garantindo escalabilidade 
 
    - Relatórios detalhados salvos para download.
 
+   ![image](https://github.com/user-attachments/assets/80f57a49-114f-462c-a268-d85351961b4d)
+
+
 4. **Histórico de Treinos**:
    - Usuários PREMIUM podem acessar e comparar resultados de sessões anteriores.
 
