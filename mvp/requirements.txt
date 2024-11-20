@@ -1,6 +1,6 @@
 streamlit
 opencv-python-headless
-opencv-python
+#opencv-python
 mediapipe 
 torch 
 torchvision 
