@@ -1,9 +1,11 @@
 streamlit
+streamlit-webrtc
 opencv-python-headless
-#opencv-python
+opencv-python
 mediapipe 
 torch 
 torchvision 
 torchaudio
 numpy
 Pillow
+pickle-mixin
