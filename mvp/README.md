@@ -105,6 +105,8 @@ O **TVTx** foi projetado com uma arquitetura modular, garantindo escalabilidade 
 
 3. **Visualização de Resultados**:
    - Feedback em tempo real exibido na interface Streamlit.
+   ![image](https://github.com/user-attachments/assets/1d89cf42-9617-4521-a0fe-67ed36ddface)
+
    - Relatórios detalhados salvos para download.
 
 4. **Histórico de Treinos**:
