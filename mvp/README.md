@@ -92,9 +92,16 @@ O **TVTx** foi projetado com uma arquitetura modular, garantindo escalabilidade 
 
 1. **Início do Sistema**:
    - O usuário escolhe entre gravação ao vivo ou upload de vídeo.
+  ![tvtxmindvision1](https://github.com/user-attachments/assets/9e034996-7237-4b33-803d-82a1b8ffa900)
+
+    ![tvtxmindvision2](https://github.com/user-attachments/assets/77810442-d3be-4f82-bc62-833427942f3a)
+ 
    
 2. **Análise de Golpes**:
    - O sistema processa o vídeo, detecta a pose corporal e classifica os golpes.
+  
+   ![Screenshot from 2024-11-20 07-51-24](https://github.com/user-attachments/assets/0a527c83-7960-42f8-a4dc-f0957ac8caeb)
+  
 
 3. **Visualização de Resultados**:
    - Feedback em tempo real exibido na interface Streamlit.
