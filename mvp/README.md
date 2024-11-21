@@ -1,96 +1,117 @@
-# Documentação Completa: **Tênis Vídeo Treino (TVTx)**
+# Documentação Completa: 
+## Tênis Vídeo Treino - TVTxMindVision  
+### Versão: **MVP**  
 
 ---
 
-## **1. Introdução**
-O **TVTx** é uma plataforma inovadora que utiliza visão computacional e aprendizado de máquina para análise de desempenho técnico no tênis. Com suporte para reconhecimento de golpes como *Forehand*, *Backhand* e *Saque*, o sistema oferece feedback em tempo real, otimizando o treinamento esportivo e elevando o nível técnico dos jogadores.
+#### **1. Introdução**  
+
+O **TVTxMindVision** é uma aplicação inovadora que utiliza visão computacional para analisar e aprimorar a performance de jogadores de tênis. Com funcionalidades como reconhecimento de golpes e feedback em tempo real, o sistema oferece insights técnicos para jogadores, treinadores e academias esportivas.  
+
+A plataforma está em sua versão **MVP** (Produto Mínimo Viável), mas sua visão futura busca incluir funcionalidades avançadas inspiradas em soluções como o Baseline Vision, ampliando sua aplicabilidade e impacto.  
 
 ---
 
-### **1.1. Objetivo**
-O objetivo principal do **TVTx** é melhorar a experiência de aprendizado no tênis ao fornecer feedback automatizado e preciso sobre os golpes. Isso é alcançado com o uso de algoritmos avançados de aprendizado profundo e visão computacional, integrados a uma interface amigável.
+#### **1.1 Objetivo**  
 
-### **1.2. Escopo**
-A plataforma é destinada a:
-- **Jogadores amadores e profissionais**: Para aprimorar técnicas com base em dados objetivos.
-- **Treinadores**: Para obter uma análise técnica detalhada dos alunos.
-- **Clubes e academias esportivas**: Para integrar tecnologia aos treinamentos.
-
-### **1.3. Definições, Acrônimos e Abreviações**
-- **TVTx**: Tênis Vídeo Treino.
-- **GPU**: Unidade de Processamento Gráfico.
-- **ML**: *Machine Learning* (Aprendizado de Máquina).
-- **YOLO**: *You Only Look Once*, algoritmo de detecção de objetos.
-- **API Pose Detection**: Sistema de identificação de marcos corporais.
+O **TVTxMindVision** visa revolucionar o treinamento de tênis ao oferecer ferramentas automatizadas e acessíveis para análise técnica, permitindo uma evolução consistente e baseada em dados.  
 
 ---
 
-## **2. Definição do Problema**
-O treinamento esportivo no tênis ainda depende, em sua maioria, de avaliações subjetivas de treinadores. Essa abordagem pode resultar em erros ou inconsistências. Ferramentas existentes oferecem funcionalidades limitadas em feedback automatizado e personalização, criando uma lacuna para soluções mais avançadas, acessíveis e precisas.
+#### **1.2 Escopo**  
+
+- **Jogadores amadores e profissionais**: Aprimoram sua técnica por meio de feedback em tempo real.  
+- **Treinadores**: Usam análises detalhadas para melhorar os treinos.  
+- **Clubes e academias esportivas**: Adotam tecnologia para aumentar a eficiência e o desempenho técnico.  
 
 ---
 
-## **3. Arquitetura do Sistema**
-O **TVTx** foi projetado com uma arquitetura modular, garantindo escalabilidade e flexibilidade.
+#### **2. Definição do Problema**  
 
-### **3.1. Camadas Principais**
-1. **Captura de Dados**:
-   - Usa **OpenCV** para captura de vídeos ao vivo ou pré-gravados.
-   - Integra-se com câmeras e webcams.
-   
-2. **Processamento de Dados**:
-   - **YOLO e PyTorch**: Modelos treinados para detecção de movimentos e classificação de golpes.
-   - **MediaPipe**: Utilizado para análise detalhada da pose corporal.
-
-3. **Interface e Feedback**:
-   - **Streamlit**: Apresentação de resultados em tempo real.
-   - Relatórios detalhados com gráficos e vídeos processados.
-
-4. **Armazenamento**:
-   - **PostgreSQL**: Banco de dados para armazenar perfis de usuários, estatísticas e vídeos processados.
+O treinamento tradicional no tênis depende de avaliações subjetivas e treinadores experientes, o que pode levar a experiência de aprendizado a uma curva longa. Atualmente, milhões de praticantes em todo o mundo, estão cada vez mais em busca de ferramentas que lhes permita receber feedbacks sólidos sobre seu desempenho na quadra - velocidade de golpes, taxas de sucesso nos fundamentos, distribuição da bola na quadra, estatísticas durante e após o jogo e muito mais.
+Faltam soluções que melhorem a experiência tanto dos praticantes quanto do público e valorizem o evento da prática esportiva. Existem 300 milhões de tenistas no mundo, que jogam em cerca de dois milhões de quadras, isso não é exatamente uma definição de “nicho”... 
+O **TVTxMindVision** vem oferecer recursos para enriquecer a análise técnica de forma objetiva, suportada por algoritmos de aprendizado de máquina e visão computacional, elevando o nível de jogadores, técnicos e do esporte como um todo.
 
 ---
 
-## **4. Funcionalidades do Sistema**
+#### **3. Arquitetura do Sistema**  
 
-### **4.1. Funcionalidades Principais**
-- **Detecção de Pose**: Identificação de marcos corporais para análise de movimento.
-- **Classificação de Golpes**:
-  - Reconhecimento de *Forehand*, *Backhand* e *Saque*.
-- **Feedback em Tempo Real**:
-  - Relatórios instantâneos sobre a performance técnica.
-- **Exportação de Dados**:
-  - Salvamento de vídeos processados e estatísticas em formatos populares como `.avi` e `.pkl`.
-
-### **4.2. Funcionalidades Adicionais**
-- **Comparação com Referências Profissionais**:
-  - Disponível na versão PREMIUM.
-- **Dashboard Interativa**:
-  - Histórico de treinos e evolução técnica.
+O **TVTxMindVision** é desenvolvido com uma arquitetura modular e escalável, que garante flexibilidade para adição de novas funcionalidades futuras.  
 
 ---
 
-## **5. Requisitos do Sistema**
+#### **4. Funcionalidades do MVP**  
 
-### **5.1. Requisitos de Hardware**
-- CPU com suporte para processamento em tempo real.
-- GPU compatível com CUDA para otimização de desempenho (opcional).
-- Webcam ou câmera externa.
+##### **4.1 Funcionalidades Principais**  
 
-### **5.2. Requisitos de Software**
-- **Python 3.10+**
-- Bibliotecas:
-  - OpenCV
-  - PyTorch
-  - MediaPipe
-  - Streamlit
-  - PostgreSQL
+1. **Detecção de Pose**  
+   - Identifica marcos corporais com alta precisão utilizando MediaPipe.  
+
+2. **Classificação de Golpes**  
+   - Reconhece Forehand, Backhand e Saque.  
+
+3. **Feedback em Tempo Real**  
+   - Fornece resultados instantâneos para correções rápidas.  
+
+4. **Estatísticas e Relatórios**  
+   - Contagem de golpes e exportação de resultados em formatos populares.  
+
+##### **4.2 Funcionalidades Planejadas (Versão Futura)**  
+
+Inspiradas na prática do esporte como um todo, as funcionalidades futuras incluem:  
+
+1. **Análise Detalhada de Trajetória da Bola**  
+   - Integração com visão computacional para rastrear a trajetória da bola e avaliar o impacto do golpe.
+   - Chamadas de linha e desafios - Chega de argumentos ou distrações. Chamadas de linha precisas em tempo real com visualização 3D para seus torneios ou partidas casuais.
+  
+2. **Reconhecimento de Áreas de Impacto**  
+   - Avaliação de onde a bola está caindo na quadra (cross-court, down the line, etc.).  
+
+3. **Medidas de Velocidade e Spin**  
+   - Estima a velocidade da bola e a rotação em cada golpe.  
+
+4. **Detecção de Erros Técnicos**  
+   - Identificação de padrões como postura inadequada, ângulos incorretos e desalinhamentos.  
+
+5. **Classificação de Estilo de Jogo**  
+   - Análise do estilo do jogador (agressivo, defensivo, baseline) com base em padrões recorrentes.  
+
+6. **Treinamento Guiado**  
+   - Sugestões automáticas de exercícios baseados em análises técnicas do jogador.
+   - Exercícios Gamificados - Envolva-se, compita e divirta-se enquanto pratica suas habilidades.
+   - feedback de luz e som, placares, classificações...
+
+‍7. **Dashboards Personalizados**  
+   - Painéis interativos com histórico detalhado de treinos, metas e progresso.  
+
+8. **Modo Competição**  
+   - Comparação em tempo real com outros jogadores ou padrões de desempenho estabelecidos por profissionais.  
 
 ---
 
-## **6. Fluxo de Uso**
+#### **5. Requisitos do Sistema**  
 
-1. **Início do Sistema**:
+##### **5.1 Requisitos do MVP**  
+
+- **Hardware**:  
+  - CPU para processamento em tempo real.  
+  - GPU com suporte CUDA (opcional, mas recomendado).  
+  - Webcam ou câmera externa de alta resolução.  
+
+- **Software**:  
+  - Python 3.10+  
+  - Bibliotecas: OpenCV, MediaPipe, NumPy, Streamlit.  
+
+##### **5.2 Requisitos Adicionais para Versão Futura**  
+
+- **Câmeras com Alta Taxa de Quadros**: Para análise precisa de velocidade e spin.  
+- **Integração com IoT**: Dispositivos inteligentes para capturar dados adicionais, como sensores de impacto na raquete.  
+
+---
+
+#### **6. Fluxo de Uso**
+
+##### 6.1 **Início do Sistema**:
    - O usuário escolhe entre gravação ao vivo ou upload de vídeo.
    
       ![tvtxmindvision1](https://github.com/user-attachments/assets/9e034996-7237-4b33-803d-82a1b8ffa900)
@@ -98,13 +119,13 @@ O **TVTx** foi projetado com uma arquitetura modular, garantindo escalabilidade 
       ![tvtxmindvision2](https://github.com/user-attachments/assets/77810442-d3be-4f82-bc62-833427942f3a)
  
    
-2. **Análise de Golpes**:
+##### 6.2 **Análise de Golpes**:
    - O sistema processa o vídeo, detecta a pose corporal e classifica os golpes.
   
       ![Screenshot from 2024-11-20 07-51-24](https://github.com/user-attachments/assets/0a527c83-7960-42f8-a4dc-f0957ac8caeb)
   
 
-3. **Visualização de Resultados**:
+##### 6.3 **Visualização de Resultados**:
    - Feedback em tempo real exibido na interface Streamlit.
    - 
       ![image](https://github.com/user-attachments/assets/1d89cf42-9617-4521-a0fe-67ed36ddface)
@@ -113,41 +134,17 @@ O **TVTx** foi projetado com uma arquitetura modular, garantindo escalabilidade 
 
       ![image](https://github.com/user-attachments/assets/80f57a49-114f-462c-a268-d85351961b4d)
 
+---
 
-4. **Histórico de Treinos**:
-   - Usuários PREMIUM podem acessar e comparar resultados de sessões anteriores.
+#### **7. Conclusão**  
+
+O **TVTxMindVision** traz inovação e tecnologia de ponta ao treinamento de tênis, mesmo em sua versão MVP. As funcionalidades planejadas para o futuro consolidam sua proposta como uma solução completa para jogadores, treinadores e clubes. 
+Não importa se você está trabalhando em sua profundidade, consistência, ritmo ou precisão, sua quadra se transforma em um playground virtual!  
 
 ---
 
-## **7. Testes e Validação**
+#### **8. Contato e Referências**  
 
-### **7.1. Estratégia de Testes**
-- **Testes Funcionais**:
-  - Verificação de detecção de golpes em diferentes ângulos e velocidades.
-- **Testes de Usabilidade**:
-  - Validação com grupos de usuários para medir a eficácia da interface.
-- **Testes de Desempenho**:
-  - Avaliação da latência do feedback em tempo real.
-
-### **7.2. Resultados Esperados**
-- Precisão acima de 90% na detecção e classificação de golpes.
-- Redução significativa no tempo de análise comparado a métodos manuais.
-
----
-
-## **8. Conclusão**
-O **TVTx** é uma solução poderosa e acessível para jogadores e treinadores de tênis que desejam elevar seu nível técnico com o auxílio de tecnologias modernas. Seu diferencial reside no feedback em tempo real e na integração de aprendizado de máquina com visão computacional.
-
----
-
-## **9. Referências**
-- Documentação oficial do OpenCV, PyTorch e MediaPipe.
-- Artigos sobre visão computacional e aprendizado profundo aplicados ao esporte.
-
----
-
-**Repositórios Relacionados**:
-- [Repositório TVTx no GitHub](https://github.com/FeralUnsettler/tvtx)
-
-**Contato**:
-Luciano Martins Fagundes | [LinkedIn](https://www.linkedin.com/in/luxxmf/)
+- Documentação oficial: OpenCV, MediaPipe.  
+- Repositório GitHub: [TVTxMindVision](https://github.com/feralunsettler/tvtx/mvp/tvtxmindvision_optimus.py)  
+- **Contato**: Luciano Martins Fagundes | [LinkedIn](https://www.linkedin.com/in/luxxmf/)  
