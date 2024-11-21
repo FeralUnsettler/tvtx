@@ -27,7 +27,9 @@ O **TVTxMindVision** visa revolucionar o treinamento de tênis ao oferecer ferra
 
 #### **2. Definição do Problema**  
 
-O treinamento tradicional no tênis depende de avaliações subjetivas e treinadores experientes, o que pode levar a inconsistências. O **TVTxMindVision** resolve esse problema ao oferecer análise técnica objetiva e automatizada, suportada por algoritmos de aprendizado de máquina e visão computacional.  
+O treinamento tradicional no tênis depende de avaliações subjetivas e treinadores experientes, o que pode levar a experiência de aprendizado a uma curva longa. Atualmente, milhões de praticantes em todo o mundo, estão cada vez mais em busca de ferramentas que lhes permita receber feedbacks sólidos sobre seu desempenho na quadra - velocidade de golpes, taxas de sucesso nos fundamentos, distribuição da bola na quadra, estatísticas durante e após o jogo e muito mais.
+Faltam soluções que melhorem a experiência tanto dos praticantes quanto do público e valorizem o evento da prática esportiva. Existem 300 milhões de tenistas no mundo, que jogam em cerca de dois milhões de quadras, isso não é exatamente uma definição de “nicho”... 
+O **TVTxMindVision** vem oferecer recursos para enriquecer a análise técnica de forma objetiva, suportada por algoritmos de aprendizado de máquina e visão computacional, elevando o nível de jogadores, técnicos e do esporte como um todo.
 
 ---
 
@@ -55,11 +57,12 @@ O **TVTxMindVision** é desenvolvido com uma arquitetura modular e escalável, q
 
 ##### **4.2 Funcionalidades Planejadas (Versão Futura)**  
 
-Inspiradas no **Baseline Vision**, as funcionalidades futuras incluem:  
+Inspiradas na prática do esporte como um todo, as funcionalidades futuras incluem:  
 
 1. **Análise Detalhada de Trajetória da Bola**  
-   - Integração com visão computacional para rastrear a trajetória da bola e avaliar o impacto do golpe.  
-
+   - Integração com visão computacional para rastrear a trajetória da bola e avaliar o impacto do golpe.
+   - Chamadas de linha e desafios - Chega de argumentos ou distrações. Chamadas de linha precisas em tempo real com visualização 3D para seus torneios ou partidas casuais.
+  
 2. **Reconhecimento de Áreas de Impacto**  
    - Avaliação de onde a bola está caindo na quadra (cross-court, down the line, etc.).  
 
@@ -73,9 +76,11 @@ Inspiradas no **Baseline Vision**, as funcionalidades futuras incluem:
    - Análise do estilo do jogador (agressivo, defensivo, baseline) com base em padrões recorrentes.  
 
 6. **Treinamento Guiado**  
-   - Sugestões automáticas de exercícios baseados em análises técnicas do jogador.  
+   - Sugestões automáticas de exercícios baseados em análises técnicas do jogador.
+   - Exercícios Gamificados - Envolva-se, compita e divirta-se enquanto pratica suas habilidades.
+   - feedback de luz e som, placares, classificações...
 
-7. **Dashboards Personalizados**  
+‍7. **Dashboards Personalizados**  
    - Painéis interativos com histórico detalhado de treinos, metas e progresso.  
 
 8. **Modo Competição**  
@@ -103,7 +108,7 @@ Inspiradas no **Baseline Vision**, as funcionalidades futuras incluem:
 
 ---
 
-#### **6. Fluxo de Uso**  
+#### **6. Fluxo de Uso do MVP**  
 
 1. **Início do Sistema**  
    - Escolha entre gravação ao vivo ou upload de vídeos.  
@@ -114,13 +119,14 @@ Inspiradas no **Baseline Vision**, as funcionalidades futuras incluem:
 
 3. **Relatórios e Evolução**  
    - Exportação de dados processados.  
-   - Visualização de histórico e progresso (na versão PREMIUM).  
+   - Visualização de histórico e progresso
 
 ---
 
 #### **7. Conclusão**  
 
-O **TVTxMindVision** traz inovação e tecnologia de ponta ao treinamento de tênis, mesmo em sua versão MVP. As funcionalidades planejadas para o futuro consolidam sua proposta como uma solução completa para jogadores, treinadores e clubes.  
+O **TVTxMindVision** traz inovação e tecnologia de ponta ao treinamento de tênis, mesmo em sua versão MVP. As funcionalidades planejadas para o futuro consolidam sua proposta como uma solução completa para jogadores, treinadores e clubes. 
+Não importa se você está trabalhando em sua profundidade, consistência, ritmo ou precisão, sua quadra se transforma em um playground virtual!  
 
 ---
 
