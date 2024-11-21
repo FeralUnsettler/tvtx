@@ -108,18 +108,30 @@ Inspiradas na prática do esporte como um todo, as funcionalidades futuras inclu
 
 ---
 
-#### **6. Fluxo de Uso do MVP**  
+#### **6. Fluxo de Uso**
 
-1. **Início do Sistema**  
-   - Escolha entre gravação ao vivo ou upload de vídeos.  
+##### 6.1 **Início do Sistema**:
+   - O usuário escolhe entre gravação ao vivo ou upload de vídeo.
+   
+      ![tvtxmindvision1](https://github.com/user-attachments/assets/9e034996-7237-4b33-803d-82a1b8ffa900)
 
-2. **Análise Técnica**  
-   - Detecção de golpes e geração de estatísticas.  
-   - Feedback em tempo real exibido na interface.  
+      ![tvtxmindvision2](https://github.com/user-attachments/assets/77810442-d3be-4f82-bc62-833427942f3a)
+ 
+   
+##### 6.2 **Análise de Golpes**:
+   - O sistema processa o vídeo, detecta a pose corporal e classifica os golpes.
+  
+      ![Screenshot from 2024-11-20 07-51-24](https://github.com/user-attachments/assets/0a527c83-7960-42f8-a4dc-f0957ac8caeb)
+  
 
-3. **Relatórios e Evolução**  
-   - Exportação de dados processados.  
-   - Visualização de histórico e progresso
+##### 6.3 **Visualização de Resultados**:
+   - Feedback em tempo real exibido na interface Streamlit.
+   - 
+      ![image](https://github.com/user-attachments/assets/1d89cf42-9617-4521-a0fe-67ed36ddface)
+
+   - Relatórios detalhados salvos para download.
+
+      ![image](https://github.com/user-attachments/assets/80f57a49-114f-462c-a268-d85351961b4d)
 
 ---
 
