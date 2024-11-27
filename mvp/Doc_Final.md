@@ -1,6 +1,5 @@
-# Documentação Completa: 
-## Tênis Vídeo Treino - TVTxMindVision  
-### Versão: **MVP**  
+### Documentação Completa: Tênis Vídeo Treino - TVTxMindVision  
+Versão: **MVP**  
 
 ---
 
