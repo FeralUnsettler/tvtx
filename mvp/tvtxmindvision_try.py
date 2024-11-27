@@ -192,7 +192,7 @@ if video_source == "Fazer upload de um vídeo":
 
 else:
     if st.sidebar.button("Iniciar Gravação com Webcam ao Vivo (20 segundos)"):
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(-1)
         if not cap.isOpened():
             st.error("Não foi possível abrir a webcam.")
         else:
