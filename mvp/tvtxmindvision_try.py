@@ -82,11 +82,12 @@ st.markdown("Detect tennis strokes in real-time using your webcam!")
 
 webrtc_ctx = webrtc_streamer(
     key="stroke-detection",
-    mode="video",
+    mode="video",  # Corrigido para usar a string diretamente
     rtc_configuration=RTC_CONFIGURATION,
     video_processor_factory=StrokeDetectionProcessor,
     media_stream_constraints={"video": True, "audio": False},
 )
+
 
 if webrtc_ctx.video_processor:
     stroke_counter = webrtc_ctx.video_processor.stroke_counter
