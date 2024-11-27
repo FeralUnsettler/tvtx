@@ -2,76 +2,129 @@ import streamlit as st
 import cv2
 import tempfile
 import mediapipe as mp
-import time
-import torch
-import pickle
 import numpy as np
-import os
+import time
+import pickle
+from collections import Counter
 
-# Check if CUDA is available
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
-st.sidebar.write(f"Using device: {device}")
-
-# Initialize MediaPipe Pose and Drawing Utils
+# Setup para MediaPipe e processamento de vídeo
 mp_pose = mp.solutions.pose
 mp_drawing = mp.solutions.drawing_utils
 
-# Helper function to detect stroke type based on key landmarks
+# Contador para os golpes reconhecidos
+stroke_counter = Counter()
+
+# CSS para estilizar o aplicativo
+st.markdown("""
+    <style>
+        body {
+            background-image: url('https://via.placeholder.com/1500x1000.png?text=Quadra+de+T%C3%AAnis');
+            background-size: cover;
+        }
+        .main {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .stSidebar {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        td {
+            background-color: #f9f9f9;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Função para detectar golpes
 def detect_stroke(landmarks):
     if landmarks:
         right_shoulder = landmarks[12]
         right_elbow = landmarks[14]
         right_wrist = landmarks[16]
-        
-        shoulder_to_elbow = np.array([right_elbow[0] - right_shoulder[0], right_elbow[1] - right_shoulder[1]])
-        elbow_to_wrist = np.array([right_wrist[0] - right_elbow[0], right_wrist[1] - right_elbow[1]])
+
+        shoulder_to_elbow = np.array([right_elbow.x - right_shoulder.x, right_elbow.y - right_shoulder.y])
+        elbow_to_wrist = np.array([right_wrist.x - right_elbow.x, right_wrist.y - right_elbow.y])
         
         angle = np.degrees(np.arccos(
-            np.dot(shoulder_to_elbow, elbow_to_wrist) / (np.linalg.norm(shoulder_to_elbow) * np.linalg.norm(elbow_to_wrist))
+            np.dot(shoulder_to_elbow, elbow_to_wrist) / 
+            (np.linalg.norm(shoulder_to_elbow) * np.linalg.norm(elbow_to_wrist) + 1e-6)
         ))
 
-        if angle < 45 and right_wrist[1] < right_shoulder[1]:
+        if angle < 45 and right_wrist.y < right_shoulder.y:
             return "Serve"
-        elif angle > 100 and right_wrist[0] > right_shoulder[0]:
+        elif angle > 100 and right_wrist.x > right_shoulder.x:
             return "Forehand"
-        elif angle > 100 and right_wrist[0] < right_shoulder[0]:
+        elif angle > 100 and right_wrist.x < right_shoulder.x:
             return "Backhand"
 
     return "Unknown"
 
-# Function to process video, detect strokes, and save landmarks to a pickle file
-def process_video(cap, record=False):
-    fps = 30  # Set target frame rate for playback
-    stframe = st.empty()  # Placeholder for video frames
-    landmarks_data = {}
+# Função para renderizar as estatísticas em tabela
+def render_statistics(counter):
+    total_count = sum(counter.values())
+    stats_table = """
+    <table>
+        <tr>
+            <th>Golpe</th>
+            <th>Contagem</th>
+            <th>Porcentagem</th>
+        </tr>
+    """
+    for stroke, count in counter.items():
+        percentage = (count / total_count) * 100
+        stats_table += f"""
+        <tr>
+            <td>{stroke}</td>
+            <td>{count}</td>
+            <td>{percentage:.1f}%</td>
+        </tr>
+        """
+    stats_table += "</table>"
+    return stats_table
 
-    # Prepare to record video if needed
-    video_writer = None
-    if record:
-        fourcc = cv2.VideoWriter_fourcc(*'XVID')
-        video_writer = cv2.VideoWriter("recorded_video.avi", fourcc, fps, (640, 480))
+# Função para processar vídeo
+def process_video(cap, duration=20):
+    global stroke_counter
+    stroke_counter.clear()
 
-    with mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5, model_complexity=1) as pose:
-        frame_num = 0
-        start_time = time.time()
-        
-        while cap.isOpened():
+    stframe = st.image([])  # Placeholder para os frames do vídeo
+    stats_frame = st.sidebar.empty()  # Estatísticas na barra lateral
+
+    frames = []
+    start_time = time.time()
+
+    with mp_pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+        while cap.isOpened() and time.time() - start_time < duration:
             ret, frame = cap.read()
-            if not ret or (record and time.time() - start_time > 20):
+            if not ret:
                 break
 
-            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            results = pose.process(rgb_frame)
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            results = pose.process(frame_rgb)
 
             if results.pose_landmarks:
-                landmarks = {
-                    landmark_id: (landmark.x, landmark.y, landmark.z, landmark.visibility)
-                    for landmark_id, landmark in enumerate(results.pose_landmarks.landmark)
-                }
-                landmarks_data[frame_num] = landmarks
-
+                landmarks = results.pose_landmarks.landmark
                 stroke_type = detect_stroke(landmarks)
-                
+                stroke_counter[stroke_type] += 1
+
+                # Desenhar landmarks e tipo de golpe no frame
                 mp_drawing.draw_landmarks(
                     frame,
                     results.pose_landmarks,
@@ -81,71 +134,77 @@ def process_video(cap, record=False):
                 )
                 cv2.putText(frame, f"Stroke: {stroke_type}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
-            stframe.image(frame, channels='BGR', use_column_width=True)
-            if record:
-                video_writer.write(frame)
-            frame_num += 1
-            time.sleep(1.0 / fps)
+            # Atualizar os frames no Streamlit
+            stframe.image(frame, channels="BGR")
+            frames.append(frame)
+
+            # Atualizar contagem de golpes na barra lateral
+            stats_frame.markdown(render_statistics(stroke_counter), unsafe_allow_html=True)
 
     cap.release()
-    if video_writer:
-        video_writer.release()
-    
-    with open("pose_landmarks_data.pkl", "wb") as f:
-        pickle.dump(landmarks_data, f)
-    st.sidebar.success("Landmark data has been saved.")
+    return frames
 
-    if record:
-        with open("recorded_video.avi", "rb") as f:
-            st.sidebar.download_button(
-                label="Download 20-second Recorded Video",
-                data=f,
-                file_name="recorded_video.avi",
-                mime="video/x-msvideo"
-            )
-
-    with open("pose_landmarks_data.pkl", "rb") as f:
-        st.sidebar.download_button(
-            label="Download Pose Landmark Data",
-            data=f,
-            file_name="pose_landmarks_data.pkl",
-            mime="application/octet-stream"
-        )
-
-    os.remove("pose_landmarks_data.pkl")
-
-# Streamlit app interface
-st.title("TennisVideoTreino®X | Powered by BMDS®MindVision")
-
-# Instructions for the user
+# Instruções para o usuário
 st.markdown("""
-### Instructions:
-1. **Select Video Source**: Use the sidebar to choose between uploading a video or using the live webcam feed.
-2. **For Uploaded Videos**: Simply upload the video file, and it will be processed automatically.
-3. **For Webcam Recording**: Click "Start Live Webcam Recording" to record a 20-second video using your webcam.
-4. **Stroke Detection**: The app will detect and display the stroke type (Serve, Forehand, Backhand) in real-time.
-5. **Download Options**: After processing, download the landmark data and recorded video (if applicable) from the sidebar.
+    ## 🎾 Aplicativo de Análise de Golpes no Tênis
+    1. Faça upload de um vídeo ou use a webcam ao vivo.
+    2. Observe os golpes detectados em tempo real.
+    3. Veja as estatísticas detalhadas na barra lateral.
+    4. Após 20 segundos de gravação, baixe o vídeo processado e os dados gerados.
 """)
 
-# Sidebar for source selection
-source = st.sidebar.selectbox("Select Video Source", ("Upload a video file", "Live Webcam"))
+# Barra lateral para seleção da fonte de vídeo
+video_source = st.sidebar.selectbox("Selecione a Fonte de Vídeo", ("Fazer upload de um vídeo", "Webcam ao Vivo"))
 
-if source == "Upload a video file":
-    uploaded_file = st.sidebar.file_uploader("Upload a video file", type=["mp4", "mov", "avi"])
+if video_source == "Fazer upload de um vídeo":
+    uploaded_file = st.sidebar.file_uploader("Envie um arquivo de vídeo", type=["mp4", "mov", "avi"])
     if uploaded_file is not None:
         tfile = tempfile.NamedTemporaryFile(delete=False)
         tfile.write(uploaded_file.read())
         tfile.close()
-        
+
         cap = cv2.VideoCapture(tfile.name)
-        st.text("Processing uploaded video, please wait...")
-        process_video(cap)
-        
-else:
-    if st.sidebar.button("Start Live Webcam Recording (20 seconds)"):
+        st.text("Processando vídeo enviado, por favor aguarde...")
+        frames = process_video(cap)
+
+        # Salvar vídeo processado
+        video_output = "processed_video.mp4"
+        height, width, _ = frames[0].shape
+        out = cv2.VideoWriter(video_output, cv2.VideoWriter_fourcc(*'mp4v'), 30, (width, height))
+        for frame in frames:
+            out.write(frame)
+        out.release()
+
+        # Salvar dados de contagem
+        pickle_output = "stroke_data.pkl"
+        with open(pickle_output, 'wb') as f:
+            pickle.dump(stroke_counter, f)
+
+        # Botões de download
+        st.sidebar.download_button("Baixar Vídeo Processado", open(video_output, "rb"), file_name="processed_video.mp4")
+        st.sidebar.download_button("Baixar Dados de Golpes", open(pickle_output, "rb"), file_name="stroke_data.pkl")
+
+elif video_source == "Webcam ao Vivo":
+    if st.sidebar.button("Iniciar Gravação com Webcam ao Vivo"):
         cap = cv2.VideoCapture(0)
         if not cap.isOpened():
-            st.error("Could not open webcam.")
+            st.error("Não foi possível abrir a webcam.")
         else:
-            st.text("Processing live webcam feed, please wait...")
-            process_video(cap, record=True)
+            st.text("Gravando vídeo ao vivo por 20 segundos...")
+            frames = process_video(cap)
+
+            # Salvar vídeo e dados
+            video_output = "processed_video.mp4"
+            height, width, _ = frames[0].shape
+            out = cv2.VideoWriter(video_output, cv2.VideoWriter_fourcc(*'mp4v'), 30, (width, height))
+            for frame in frames:
+                out.write(frame)
+            out.release()
+
+            pickle_output = "stroke_data.pkl"
+            with open(pickle_output, 'wb') as f:
+                pickle.dump(stroke_counter, f)
+
+            # Botões de download
+            st.sidebar.download_button("Baixar Vídeo Processado", open(video_output, "rb"), file_name="processed_video.mp4")
+            st.sidebar.download_button("Baixar Dados de Golpes", open(pickle_output, "rb"), file_name="stroke_data.pkl")
