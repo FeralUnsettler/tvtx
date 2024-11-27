@@ -1,4 +1,4 @@
 streamlit
-opencv-python-headless
+streamlit_webrtc
 mediapipe 
 numpy
