@@ -46,6 +46,9 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
 - Reconhecimento dos principais golpes: **Forehand, Backhand e Saque**.  
 - Avaliação baseada em padrões biomecânicos.  
 
+![image](https://github.com/user-attachments/assets/a08bfa8d-0ffd-4520-abe5-5d1ba401a491)
+
+
 #### **3. Feedback em Tempo Real**  
 - Exibição de resultados imediatos após a análise.  
 - Identificação de erros técnicos e sugestões rápidas de correção.  
@@ -53,8 +56,6 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
 #### **4. Estatísticas e Relatórios**  
 - Contagem de golpes e categorizações automáticas.  
 - Exportação de relatórios em formatos populares como **PDF e CSV**.  
-
-![7](https://github.com/user-attachments/assets/06c41af3-85f9-47bb-b5d5-6984f604f024)
 
 ---
 
@@ -71,7 +72,9 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
    - Determina onde a bola está caindo na quadra (cross-court, down the line).  
 
 4. **Medição de Velocidade e Spin**  
-   - Calcula a velocidade e rotação da bola para insights mais avançados.  
+   - Calcula a velocidade e rotação da bola para insights mais avançados.
+  
+![7](https://github.com/user-attachments/assets/06c41af3-85f9-47bb-b5d5-6984f604f024)
 
 5. **Detecção de Erros Técnicos**  
    - Identifica falhas na postura e desalinhamentos durante os golpes.  
@@ -81,8 +84,6 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
 
 7. **Painéis Personalizados**  
    - Histórico detalhado de treinos e progressos.
-
-![image](https://github.com/user-attachments/assets/a08bfa8d-0ffd-4520-abe5-5d1ba401a491)
 
 ---
 
