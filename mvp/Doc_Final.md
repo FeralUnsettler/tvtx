@@ -19,12 +19,15 @@ O objetivo do **TVTxMindVision** é fornecer uma ferramenta moderna e acessível
 - Oferecer feedback imediato e dados objetivos para correção e aperfeiçoamento.  
 - Ampliar a eficiência de treinadores e academias esportivas.  
 
+
 ---
 
 ## 3. Problema e Solução  
 
 ### 3.1 Problema  
 O treinamento tradicional em tênis ainda depende de avaliações subjetivas, exigindo treinadores experientes e grandes investimentos de tempo e recursos. Isso dificulta o acesso a análises técnicas de qualidade por jogadores amadores ou clubes menores.  
+
+![6](https://github.com/user-attachments/assets/976a504e-427f-426b-aebb-4175009c8f77)
 
 ### 3.2 Solução  
 O **TVTxMindVision** integra visão computacional e aprendizado de máquina para automatizar o processo de análise técnica, oferecendo feedback imediato, relatórios detalhados e sugestões de melhoria.  
@@ -79,6 +82,7 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
 7. **Painéis Personalizados**  
    - Histórico detalhado de treinos e progressos.
 
+![image](https://github.com/user-attachments/assets/a08bfa8d-0ffd-4520-abe5-5d1ba401a491)
 
 ---
 
