@@ -68,11 +68,11 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
 2. **Chamadas de Linha e Desafios**  
    - Oferece precisão em disputas com visualização 3D para partidas competitivas.
   
-![7](https://github.com/user-attachments/assets/06c41af3-85f9-47bb-b5d5-6984f604f024)
-
-
 3. **Reconhecimento de Áreas de Impacto**  
-   - Determina onde a bola está caindo na quadra (cross-court, down the line).  
+   - Determina onde a bola está caindo na quadra (cross-court, down the line).
+  
+![image](https://github.com/user-attachments/assets/2fb19d91-ae4c-4d60-9318-12863db774e2)
+
 
 4. **Medição de Velocidade e Spin**  
    - Calcula a velocidade e rotação da bola para insights mais avançados.
@@ -81,7 +81,9 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
    - Identifica falhas na postura e desalinhamentos durante os golpes.  
 
 6. **Treinamento Gamificado**  
-   - Engajamento do jogador com exercícios lúdicos e pontuações.  
+   - Engajamento do jogador com exercícios lúdicos e pontuações.
+  
+![7](https://github.com/user-attachments/assets/06c41af3-85f9-47bb-b5d5-6984f604f024)
 
 7. **Painéis Personalizados**  
    - Histórico detalhado de treinos e progressos.
