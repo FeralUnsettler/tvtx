@@ -1,6 +1,8 @@
 ### Documentação Completa: **Tênis Vídeo Treino - TVTxMindVision**  
-**Versão:** MVP  
 
+![image](https://github.com/user-attachments/assets/dd4016d3-6a77-4fd9-b3bb-2dae361b74ae)
+
+**Versão:** MVP  
 ---
 
 ## 1. Introdução  
@@ -49,9 +51,12 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
 - Contagem de golpes e categorizações automáticas.  
 - Exportação de relatórios em formatos populares como **PDF e CSV**.  
 
+![7](https://github.com/user-attachments/assets/06c41af3-85f9-47bb-b5d5-6984f604f024)
+
 ---
 
 ### 4.2 Funcionalidades Planejadas (Produto Ideal)  
+
 
 1. **Análise de Trajetória da Bola**  
    - Rastreia a trajetória da bola para avaliar precisão e impacto.  
@@ -72,7 +77,8 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
    - Engajamento do jogador com exercícios lúdicos e pontuações.  
 
 7. **Painéis Personalizados**  
-   - Histórico detalhado de treinos e progressos.  
+   - Histórico detalhado de treinos e progressos.
+
 
 ---
 
@@ -89,6 +95,9 @@ O **TVTxMindVision** integra visão computacional e aprendizado de máquina para
 
 3. **Streamlit**  
    - Interface de usuário interativa para visualização de dados e feedbacks.  
+
+![image](https://github.com/user-attachments/assets/ea2d0bb0-8924-48ac-9ee5-e1bb05749d51)
+
 
 ### **Para o Produto Ideal**  
 1. **Câmeras com Alta Taxa de Quadros**  
