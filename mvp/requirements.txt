@@ -1,5 +1,7 @@
 streamlit
-streamlit_webrtc
-opencv-python-headless
+streamlit-webrtc
+opencv-python
 mediapipe 
 numpy
+aioice
+torch
