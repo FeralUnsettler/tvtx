@@ -158,8 +158,6 @@ A arquitetura modular permite escalabilidade e integração com tecnologias futu
 - Melhoria no desempenho técnico de jogadores amadores e profissionais.  
 - Maior eficiência no treinamento esportivo com relatórios personalizados e feedback instantâneo.
 
-https://github.com/user-attachments/assets/bb409943-e373-497a-80d7-1bc4460df23e
-
 ---
 
 ## 9. Conclusão  
@@ -169,11 +167,6 @@ O **TVTxMindVision** é mais do que uma plataforma de análise técnica — é u
 Seja você iniciante ou profissional, o **TVTxMindVision** é o parceiro perfeito para alcançar o próximo nível no tênis.  
 
 ---
-
-
-
-https://github.com/user-attachments/assets/d5b26be3-167e-4b81-a6b1-19fd70679fb0
-
 
 
 ## 10. Contato  
