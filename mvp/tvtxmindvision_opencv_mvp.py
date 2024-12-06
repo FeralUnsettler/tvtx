@@ -119,7 +119,7 @@ def display_processed_video(video_path):
     st.video(video_bytes)  # Display the video in Streamlit
 
 # Add decoration with the App Logo (instead of the name)
-logo_image = "img/logo.png"  # Replace with your logo file path
+logo_image = "mvp/img/logo.png"  # Replace with your logo file path
 st.image(logo_image, use_container_width=True)
 
 # Instruções para o usuário
