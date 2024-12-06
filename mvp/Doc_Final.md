@@ -229,6 +229,7 @@ O **TVTxMindVision** é mais do que uma plataforma de análise técnica — é u
 Seja você iniciante ou profissional, o **TVTxMindVision** é o parceiro perfeito para alcançar o próximo nível no tênis.  
 
 ---
+![image](https://github.com/user-attachments/assets/9539f88b-ed70-492e-ae76-e5982f2d1030)
 
 
 ## Contato  
