@@ -234,4 +234,9 @@ Seja você iniciante ou profissional, o **TVTxMindVision** é o parceiro perfeit
 ## Contato  
 
 - **Repositório GitHub:** [TVTxMindVision](#)  
+<<<<<<< HEAD
 - **LinkedIn:** Luciano Martins Fagundes
+=======
+- **LinkedIn:** Luciano Martins Fagundes  
+
+>>>>>>> d1b9604183366a911e3c1f5935d974364025531b
