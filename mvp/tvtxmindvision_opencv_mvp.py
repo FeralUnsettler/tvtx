@@ -118,22 +118,9 @@ def display_processed_video(video_path):
     video_bytes = video_file.read()  # Read the file's bytes
     st.video(video_bytes)  # Display the video in Streamlit
 
-# Add decoration with the App Name
-st.markdown("""
-    <style>
-        .app-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #1E3A8A;  /* Dark blue */
-            text-align: center;
-            margin-bottom: 20px;
-            font-family: 'Arial', sans-serif;
-        }
-    </style>
-    <div class="app-title">
-        BMDS®MindVision
-    </div>
-""", unsafe_allow_html=True)
+# Add decoration with the App Logo (instead of the name)
+logo_image = "img/logo.png"  # Replace with your logo file path
+st.image(logo_image, use_container_width=True)
 
 # Instruções para o usuário
 st.markdown("""
@@ -179,16 +166,9 @@ if video_source == "Fazer upload de um vídeo":
         st.sidebar.bar_chart([count / total_count for count in stroke_counter.values()])
 
         # Botões de download
-        #if video_file:
-            #with open(video_file, "rb") as f:
-                #st.sidebar.download_button("Baixar Vídeo", f, file_name="video.mp4")
         if pickle_file:
             with open(pickle_file, "rb") as f:
                 st.sidebar.download_button("Baixar Dados (pickle)", f, file_name="dados.pkl")
-
-        # Exibição do vídeo processado
-        #st.write("### Vídeo Processado")
-        #display_processed_video(video_file)
 
 else:
     if st.sidebar.button("Iniciar Gravação com Webcam ao Vivo (20 segundos)"):
@@ -226,5 +206,4 @@ else:
 
             # Exibição do vídeo processado
             st.write("### Vídeo Processado")
-
             display_processed_video(video_file)
