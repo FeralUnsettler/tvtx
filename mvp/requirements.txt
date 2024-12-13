@@ -1,5 +1,7 @@
 streamlit
-streamlit-camera-input-live
 opencv-python-headless
 mediapipe
 numpy
+pandas
+matplotlib
+camera-input-live
