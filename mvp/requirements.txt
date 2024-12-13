@@ -4,4 +4,4 @@ mediapipe
 numpy
 pandas
 matplotlib
-camera-input-live
+streamlit-camera-input-live
