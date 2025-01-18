@@ -5,8 +5,6 @@ from PIL import Image
 # Adiciona o logo e instruções
 # Carrega a imagem usando PIL
 logo_image = Image.open("logo.png")  # Substitua pelo caminho da sua imagem
-
-# Exibe a imagem em um contêiner
 st.image(logo_image, use_container=True, caption="Meu Logo", width=200)
 st.set_page_config(page_title="Benchmark TVTx®MindVision vs. Baseline®Vision", layout="wide")
 st.image(logo_image, use_container=True)
