@@ -5,7 +5,7 @@ from PIL import Image
 # Adiciona o logo e instruções
 # Carrega a imagem usando PIL
 logo_image = Image.open("benchmark/streamlit_app/logo.png")  # Substitua pelo caminho da sua imagem
-st.image(logo_image, use_container=True, caption="Meu Logo", width=200)
+st.image(logo_image, use_column_width=True)
 st.set_page_config(page_title="Benchmark TVTx®MindVision vs. Baseline®Vision", layout="wide")
 st.image(logo_image, use_container=True)
 st.sidebar.title("Navegação")
