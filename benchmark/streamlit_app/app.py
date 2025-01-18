@@ -6,7 +6,7 @@ from PIL import Image
 # Carrega a imagem usando PIL
 logo_image = Image.open("benchmark/streamlit_app/logo.png")  # Substitua pelo caminho da sua imagem
 st.set_page_config(page_title="Benchmark TVTx®MindVision vs. Baseline®Vision", layout="wide")
-st.image(logo_image, use_container_width=True)
+st.image(logo_image, use_container=True, caption="TVTx®MindVision", width=200)
 st.sidebar.title("Navegação")
 st.sidebar.markdown("### Escolha uma página:")
 page = st.sidebar.radio("Ir para:", ["Análise", "Consultar CSV", "Consultar Banco de Dados"])
