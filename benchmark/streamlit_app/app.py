@@ -1,10 +1,13 @@
 import streamlit as st
-
+from PIL import Image
 # Título do aplicativo
 # Configuração da interface do Streamlit
 # Adiciona o logo e instruções
-logo_image = "mvp/img/logo.png"  # Substitua pelo caminho do seu logo
+# Carrega a imagem usando PIL
+logo_image = Image.open("logo.png")  # Substitua pelo caminho da sua imagem
 
+# Exibe a imagem em um contêiner
+st.image(logo_image, use_container=True, caption="Meu Logo", width=200)
 st.set_page_config(page_title="Benchmark TVTx®MindVision vs. Baseline®Vision", layout="wide")
 st.image(logo_image, use_container=True)
 st.sidebar.title("Navegação")
