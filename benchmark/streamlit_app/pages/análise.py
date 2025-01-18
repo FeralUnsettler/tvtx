@@ -1,4 +1,4 @@
-import streamlit as st
+hmimport streamlit as st
 import pandas as pd
 import numpy as np
 import sqlite3
@@ -47,7 +47,7 @@ def save_results_to_db(tvtx_results, swingvision_results):
     conn.close()
 
 def run_análise():
-    st.title("Análise de Vídeo")
+    st.title("Benchmark de Análise de Vídeo")
     st.markdown("### Carregue um vídeo de treino para análise")
 
     # Upload de vídeo
