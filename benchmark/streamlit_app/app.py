@@ -5,6 +5,7 @@ import streamlit as st
 # Adiciona o logo e instruções
 logo_image = "mvp/img/logo.png"  # Substitua pelo caminho do seu logo
 st.image(logo_image, use_column_width=True)
+
 st.set_page_config(page_title="Benchmark TVTx®MindVision vs. Baseline®Vision", layout="wide")
 st.sidebar.title("Navegação")
 st.sidebar.markdown("### Escolha uma página:")
