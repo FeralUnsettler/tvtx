@@ -1,10 +1,7 @@
 streamlit
-streamlit-webrtc
 opencv-python-headless
-mediapipe 
-torch 
-torchvision 
-torchaudio
+mediapipe
 numpy
-Pillow
-pickle-mixin
+pandas
+matplotlib
+streamlit-camera-input-live

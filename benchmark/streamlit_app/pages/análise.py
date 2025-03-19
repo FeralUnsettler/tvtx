@@ -47,7 +47,7 @@ def save_results_to_db(tvtx_results, swingvision_results):
     conn.close()
 
 def run_análise():
-    st.title("Análise de Vídeo")
+    st.title("Benchmark de Análise de Vídeo")
     st.markdown("### Carregue um vídeo de treino para análise")
 
     # Upload de vídeo

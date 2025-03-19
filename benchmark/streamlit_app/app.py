@@ -1,7 +1,12 @@
 import streamlit as st
-
+from PIL import Image
 # Título do aplicativo
-st.set_page_config(page_title="Benchmark: Tênis Vídeo Treino vs. SwingVision", layout="wide")
+# Configuração da interface do Streamlit
+# Adiciona o logo e instruções
+# Carrega a imagem usando PIL
+logo_image = Image.open("benchmark/streamlit_app/logo.png")  # Substitua pelo caminho da sua imagem
+st.set_page_config(page_title="Benchmark TVTx®MindVision vs. Baseline®Vision", layout="wide")
+st.image(logo_image, use_container_width=True, caption="TVTx®MindVision", width=200)
 st.sidebar.title("Navegação")
 st.sidebar.markdown("### Escolha uma página:")
 page = st.sidebar.radio("Ir para:", ["Análise", "Consultar CSV", "Consultar Banco de Dados"])
